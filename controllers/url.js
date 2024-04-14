@@ -9,7 +9,9 @@ const app = express();
 // Middleware to parse JSON-encoded request bodies
 app.use(express.json());
 
-
+const path = require("path");
+app.set("view engine","ejs");
+app.set("views", path.resolve("./views"));
 
 async function handleGenerateNewUrl(req, res) {
     const shortID = nanoid(8); // Generate a unique short ID of length 8
@@ -24,7 +26,10 @@ async function handleGenerateNewUrl(req, res) {
             redirectURL: body.url,
             visitHistory: [],
         });
-        res.json({ id: shortID });
+        //res.json({ id: shortID });
+        res.render("home", {
+            id:shortID,
+        })
     } catch (error) {
         console.error("Error creating new URL:", error);
         return res.status(500).json({ message: "Internal server error" });
@@ -47,7 +52,7 @@ async function handleGetUrl(req, res){
         }
     )
 
-    res.redirect(entry.redirectURL)
+    res.redirect(entry.redirectURL);
 
 }
 
@@ -61,10 +66,18 @@ async function handleGetAnalytics(req, res){
     })
 }
 
+async function handleGetEjs(req, res){
+
+    const allUrl= await URL.find({});
+    res.render("home", {
+        urls:allUrl,
+    })
+}
 
 module.exports = {
     handleGenerateNewUrl,
     handleGetUrl,
     handleGetAnalytics,
+    handleGetEjs,
 }
 

@@ -6,6 +6,46 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>helo</h1>
+    <div>
+        <h1>helo</h1>                                                        
+        <form method="POST" action="/url"> 
+            <label> enter url</label>
+            <input type="text" name="url" placeholder="https://example.com">
+            <button type="submit"> generate short url </button>
+        </form>
+    </div>
+
+    <% if (locals.id) { %>
+        <p>generated url : http://localhost:3000/url/<%= id %></p>
+    <% } %>
+
+    <div>
+        <% if (locals.urls) { %>
+        
+        <table>
+            <thead>
+                <th>S.no </th>
+                <th> short id</th>
+                <th> redirect url</th>
+                <th> short URL</th>
+                <th> clicks</th>
+            </thead>
+            
+            <tbody>
+                <% urls.forEach((url, index) => { %>
+                  <tr>
+                 <td><%= index + 1 %></td>
+                 <td><%= url.shortID %></td>
+                 <td><%= url.redirectURL %></td>
+                 <td><p>http://localhost:3000/url/<%= url.shortID %></p></td>
+                 <td><%= url.visitHistory.length %></td>
+                <% }) %>
+
+                 </tr>
+            </tbody>
+            
+        </table>
+        <% } %>
+    </div>
 </body>
 </html>
