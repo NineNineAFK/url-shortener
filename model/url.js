@@ -1,5 +1,5 @@
 const mongoose= require("mongoose");
-//const generate = requie("meaningful string");
+//const generate = requie("meaningful string"); // ignore
 
 const urlSchema = new mongoose.Schema(
 

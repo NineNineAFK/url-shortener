@@ -3,49 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Short URL Generator</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 50px;
+            background-color: #f8f9fa; /* Light gray background */
+        }
+        .generate-url-container {
+            border: none;
+            border-radius: 10px;
+            background-color: #dee2e6; /* Lighter gray for the form container */
+            padding: 30px;
+            width: 70%;
+            margin: 0 auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        .generate-url-container h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #343a40; /* Dark text color */
+        }
+        .generate-url-container label {
+            font-weight: bold;
+            color: #343a40; /* Dark text color */
+        }
+        .generate-url-container .btn-primary {
+            background-color: #343a40; /* Dark button color */
+            border-color: #343a40; /* Dark button border color */
+        }
+        .generate-url-container .btn-primary:hover {
+            background-color: #212529; /* Darker hover color */
+            border-color: #212529; /* Darker hover border color */
+        }
+        .table-container {
+            border: none;
+            border-radius: 10px;
+            background-color: #ced4da; /* Darker gray for the table container */
+            padding: 30px;
+            width: 90%;
+            margin: 20px auto;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .custom-table {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .table-container a {
+            color: #343a40; /* Dark text color for links */
+        }
+        .table-container td {
+            color: #343a40; /* Dark text color for table data */
+        }
+    </style>
 </head>
 <body>
-    <div>
-        <h1>helo</h1>                                                        
-        <form method="POST" action="/url"> 
-            <label> enter url</label>
-            <input type="text" name="url" placeholder="https://example.com">
-            <button type="submit"> generate short url </button>
-        </form>
-    </div>
+    <div class="container">
+        <div class="generate-url-container">
+            <h2>Generate Short URL</h2>
+            <form method="POST" action="/url">
+                <div class="form-group">
+                    <label for="urlInput">Enter URL</label>
+                    <input type="text" class="form-control" id="urlInput" name="url" placeholder="https://example.com">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Generate Short URL</button>
+            </form>
+        </div>
 
-    <% if (locals.id) { %>
-        <p>generated url : http://localhost:3000/url/<%= id %></p>
-    <% } %>
-
-    <div>
-        <% if (locals.urls) { %>
-        
-        <table>
-            <thead>
-                <th>S.no </th>
-                <th> short id</th>
-                <th> redirect url</th>
-                <th> short URL</th>
-                <th> clicks</th>
-            </thead>
-            
-            <tbody>
-                <% urls.forEach((url, index) => { %>
-                  <tr>
-                 <td><%= index + 1 %></td>
-                 <td><%= url.shortID %></td>
-                 <td><%= url.redirectURL %></td>
-                 <td><p>http://localhost:3000/url/<%= url.shortID %></p></td>
-                 <td><%= url.visitHistory.length %></td>
-                <% }) %>
-
-                 </tr>
-            </tbody>
-            
-        </table>
+        <% if (locals.id) { %>
+        <div class="alert alert-success mt-3" role="alert">
+            Generated URL: <a href="http://localhost:3000/url/<%= id %>">http://localhost:3000/url/<%= id %></a>
+        </div>
         <% } %>
     </div>
+
+    <div class="container">
+        <div class="table-container">
+            <div class="text-center">
+                <% if (locals.urls) { %>
+                    <table class="table custom-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">S.no</th>
+                                <th scope="col">Short ID</th>
+                                <th scope="col">Redirect URL</th>
+                                <th scope="col">Short URL</th>
+                                <th scope="col">Clicks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% urls.forEach((url, index) => { %>
+                                <tr>
+                                    <td><%= index + 1 %></td>
+                                    <td><%= url.shortID %></td>
+                                    <td><%= url.redirectURL %></td>
+                                    <td><a href="http://localhost:3000/url/<%= url.shortID %>">http://localhost:3000/url/<%= url.shortID %></a></td>
+                                    <td><%= url.visitHistory.length %></td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (optional, but required if you want to use Bootstrap JavaScript features) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

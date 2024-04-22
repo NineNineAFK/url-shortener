@@ -7,11 +7,11 @@ const{handleGenerateNewUrl,
         handleGetEjs}   =require("../controllers/url")
 
 
-router.post("/",handleGenerateNewUrl);
+router.post("/",handleGenerateNewUrl); //nrw member
 
-router.get("/:shortID", handleGetUrl )
+router.get("/:shortID", handleGetUrl ) // member fetch
 
-router.get("/analytics/:shortID", handleGetAnalytics);
+router.get("/analytics/:shortID", handleGetAnalytics); // admin
 
 
 module.exports=router;
