@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup</title>
+</head>
+<body>
+   <h1>login</h1>
+   <form action="/user/login" method="post">
+
+
+    <label> email </label>
+    <input type="text" name="email" id="">
+
+    <label> password </label>
+    <input type="text" name="password" id="">
+
+  
+    <% if (locals.Error) { %>
+        <% Error %>
+    <% } %>
+        <button type="submit">signup</button>
+   </form>
+   
+</body>
+</html>

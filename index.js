@@ -4,14 +4,18 @@ const path = require("path");
 
 
 const router= express.Router();
+
+
 const urlRouter= require("./routes/url");
 const staticRouter = require("./routes/staticRouter")
+const userRoute = require("./routes/user")
 
 app.use(express.json());
 app.use(express.urlencoded({extended:false}))
 
 app.use("/url", urlRouter)
 app.use("/home", staticRouter)
+app.use("/user", userRoute)
 
 
 const{handleGenerateNewUrl,

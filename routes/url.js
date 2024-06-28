@@ -7,7 +7,7 @@ const{handleGenerateNewUrl,
         handleGetEjs}   =require("../controllers/url")
 
 
-router.post("/",handleGenerateNewUrl); //nrw member
+router.post("/",handleGenerateNewUrl); //new member
 
 router.get("/:shortID", handleGetUrl ) // member fetch
 

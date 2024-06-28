@@ -3,6 +3,7 @@ const app= express();
 const router= express.Router();
 const URL = require('../model/url');
 
+
 router.get("/", async (req, res)=>{
 
     const  allUrls= await URL.find({});
@@ -11,6 +12,9 @@ router.get("/", async (req, res)=>{
     })
 })
 
+router.get("/signup", ( req, res)=>{
 
+    res.render("Signup")
+})
 
 module.exports=router;
