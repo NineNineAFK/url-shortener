@@ -1,7 +1,8 @@
 
 const { findOne } = require("../model/url");
 const User = require("../model/user")
-
+const {getUser, setUser, } = require("../service/auth")
+const {v4: uuidv4} = require("uuid");
 
 
 
@@ -32,7 +33,11 @@ async function handleUserlogin (req, res){
         }
     }
 
-    return res.render("home");
+    const sessionId = uuidv4();
+    setUser(sessionId, user);
+    res.cookie("uid", sessionId);
+    
+    return res.redirect("/home");
 }
 
 
