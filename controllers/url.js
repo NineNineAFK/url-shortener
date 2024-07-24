@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const URL = require('../model/url');
 //const generate = require('meaningful-string');
 const { nanoid } = require('nanoid');
+const {restrictToLoggedInUserOnly} = require("../middlewares/auth")
 const app = express();
 
 // Middleware to parse JSON-encoded request bodies
@@ -25,6 +26,7 @@ async function handleGenerateNewUrl(req, res) {
             shortID: shortID,
             redirectURL: body.url,
             visitHistory: [],
+            createdBy: req.user._id,
         });
         //res.json({ id: shortID });
         res.render("home", {

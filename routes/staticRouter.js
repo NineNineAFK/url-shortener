@@ -6,7 +6,7 @@ const URL = require('../model/url');
 
 router.get("/", async (req, res)=>{
 
-    const  allUrls= await URL.find({});
+    const  allUrls= await URL.find({createdBy: req.user._id}); // checks _id from URL and matches it with _id of USERS to see who made it and displays them.
     return res.render('home', {
         urls:allUrls,
     })

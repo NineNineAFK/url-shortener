@@ -6,7 +6,7 @@ const URL = require('../model/url');
 
 const app = express();
 
-// Middleware to parse JSON-encoded request bodies
+// Middleware to parse JSON-encoded request bodies.   parsing is the way to send texts from front to the back.
 app.use(express.json());
 async function handleGenerateNewUrl(req, res) {
     let shortID = shortid();
